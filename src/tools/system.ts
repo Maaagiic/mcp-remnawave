@@ -135,9 +135,12 @@ export function registerSystemTools(
 
     server.tool(
         'system_srr_matcher',
-        'Test subscription request routing rules',
+        'Validate a subscription response rules (SRR) config against the panel matcher. Body is the full responseRules config object, not an input string.',
         {
-            input: z.string().describe('Input string to test against SRR rules'),
+            responseRules: z
+                .object({})
+                .passthrough()
+                .describe('Full SRR config object (ResponseRulesConfigSchema)'),
         },
         async (params) => {
             try {

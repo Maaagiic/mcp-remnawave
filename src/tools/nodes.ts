@@ -1,7 +1,11 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { RemnawaveClient } from '../client/index.js';
-import { toolResult, toolError } from './helpers.js';
+import { toolResult, toolError, contractTool } from './helpers.js';
+import {
+    CreateNodeCommand,
+    UpdateNodeCommand,
+} from '@remnawave/backend-contract';
 
 export function registerNodeTools(server: McpServer, client: RemnawaveClient, readonly: boolean) {
     server.tool(
@@ -50,116 +54,20 @@ export function registerNodeTools(server: McpServer, client: RemnawaveClient, re
 
     if (readonly) return;
 
-    server.tool(
+    contractTool(
+        server,
         'nodes_create',
-        'Create a new node in Remnawave',
-        {
-            name: z.string().describe('Node name'),
-            address: z.string().describe('Node address (IP or hostname)'),
-            port: z.number().optional().describe('Node port'),
-            countryCode: z
-                .string()
-                .optional()
-                .describe('Country code (e.g. US, DE, NL)'),
-            isTrafficTrackingActive: z
-                .boolean()
-                .optional()
-                .describe('Enable traffic tracking'),
-            trafficLimitBytes: z
-                .number()
-                .optional()
-                .describe('Traffic limit in bytes'),
-            trafficResetDay: z
-                .number()
-                .optional()
-                .describe('Day of month to reset traffic (1-31)'),
-            notifyPercent: z
-                .number()
-                .optional()
-                .describe('Traffic notification threshold percentage'),
-            consumptionMultiplier: z
-                .number()
-                .optional()
-                .describe('Traffic consumption multiplier'),
-            activeConfigProfileUuid: z
-                .string()
-                .describe('Config profile UUID to assign'),
-            activeInbounds: z
-                .array(z.string())
-                .describe('Array of inbound UUIDs to enable'),
-        },
-        async (params) => {
-            try {
-                const body: Record<string, unknown> = {
-                    name: params.name,
-                    address: params.address,
-                    configProfile: {
-                        activeConfigProfileUuid:
-                            params.activeConfigProfileUuid,
-                        activeInbounds: params.activeInbounds,
-                    },
-                };
-                if (params.port !== undefined) body.port = params.port;
-                if (params.countryCode !== undefined)
-                    body.countryCode = params.countryCode;
-                if (params.isTrafficTrackingActive !== undefined)
-                    body.isTrafficTrackingActive =
-                        params.isTrafficTrackingActive;
-                if (params.trafficLimitBytes !== undefined)
-                    body.trafficLimitBytes = params.trafficLimitBytes;
-                if (params.trafficResetDay !== undefined)
-                    body.trafficResetDay = params.trafficResetDay;
-                if (params.notifyPercent !== undefined)
-                    body.notifyPercent = params.notifyPercent;
-                if (params.consumptionMultiplier !== undefined)
-                    body.consumptionMultiplier = params.consumptionMultiplier;
-
-                const result = await client.createNode(body);
-                return toolResult(result);
-            } catch (e) {
-                return toolError(e);
-            }
-        },
+        'Create a new node (full request schema from the Remnawave contract)',
+        CreateNodeCommand,
+        async (params) => client.createNode(params),
     );
 
-    server.tool(
+    contractTool(
+        server,
         'nodes_update',
-        'Update an existing node',
-        {
-            uuid: z.string().describe('Node UUID to update'),
-            name: z.string().optional().describe('New node name'),
-            address: z.string().optional().describe('New address'),
-            port: z.number().optional().describe('New port'),
-            countryCode: z.string().optional().describe('New country code'),
-            isTrafficTrackingActive: z
-                .boolean()
-                .optional()
-                .describe('Enable/disable traffic tracking'),
-            trafficLimitBytes: z
-                .number()
-                .optional()
-                .describe('New traffic limit'),
-            trafficResetDay: z
-                .number()
-                .optional()
-                .describe('New traffic reset day'),
-            notifyPercent: z
-                .number()
-                .optional()
-                .describe('New notification threshold'),
-            consumptionMultiplier: z
-                .number()
-                .optional()
-                .describe('New consumption multiplier'),
-        },
-        async (params) => {
-            try {
-                const result = await client.updateNode(params);
-                return toolResult(result);
-            } catch (e) {
-                return toolError(e);
-            }
-        },
+        'Update a node, incl. configProfile/tags (full request schema from the Remnawave contract)',
+        UpdateNodeCommand,
+        async (params) => client.updateNode(params),
     );
 
     server.tool(

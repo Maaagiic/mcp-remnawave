@@ -1,7 +1,11 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { RemnawaveClient } from '../client/index.js';
-import { toolResult, toolError } from './helpers.js';
+import { toolResult, toolError, contractTool } from './helpers.js';
+import {
+    CreateInternalSquadCommand,
+    UpdateInternalSquadCommand,
+} from '@remnawave/backend-contract';
 
 export function registerSquadTools(
     server: McpServer,
@@ -40,37 +44,20 @@ export function registerSquadTools(
 
     if (readonly) return;
 
-    server.tool(
+    contractTool(
+        server,
         'squads_create',
-        'Create a new internal squad',
-        {
-            name: z.string().describe('Squad name'),
-        },
-        async (params) => {
-            try {
-                const result = await client.createInternalSquad(params);
-                return toolResult(result);
-            } catch (e) {
-                return toolError(e);
-            }
-        },
+        'Create an internal squad, incl. its inbounds',
+        CreateInternalSquadCommand,
+        async (params) => client.createInternalSquad(params),
     );
 
-    server.tool(
+    contractTool(
+        server,
         'squads_update',
-        'Update an internal squad',
-        {
-            uuid: z.string().describe('Squad UUID'),
-            name: z.string().optional().describe('New squad name'),
-        },
-        async (params) => {
-            try {
-                const result = await client.updateInternalSquad(params);
-                return toolResult(result);
-            } catch (e) {
-                return toolError(e);
-            }
-        },
+        'Update an internal squad, incl. its inbounds',
+        UpdateInternalSquadCommand,
+        async (params) => client.updateInternalSquad(params),
     );
 
     server.tool(

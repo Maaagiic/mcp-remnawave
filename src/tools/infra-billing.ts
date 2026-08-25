@@ -1,7 +1,13 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { RemnawaveClient } from '../client/index.js';
-import { toolResult, toolError } from './helpers.js';
+import { toolResult, toolError, contractTool } from './helpers.js';
+import {
+    CreateInfraBillingNodeCommand,
+    CreateInfraProviderCommand,
+    UpdateInfraBillingNodeCommand,
+    UpdateInfraProviderCommand,
+} from '@remnawave/backend-contract';
 
 export function registerInfraBillingTools(server: McpServer, client: RemnawaveClient, readonly: boolean) {
     server.tool('billing_providers_list', 'List all infrastructure billing providers', {}, async () => {
@@ -24,20 +30,21 @@ export function registerInfraBillingTools(server: McpServer, client: RemnawaveCl
 
     if (readonly) return;
 
-    server.tool('billing_provider_create', 'Create a new billing provider', {
-        name: z.string().describe('Provider name'),
-        description: z.string().optional().describe('Provider description'),
-    }, async (params) => {
-        try { return toolResult(await client.createBillingProvider(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'billing_provider_create',
+        'Create a billing provider',
+        CreateInfraProviderCommand,
+        async (params) => client.createBillingProvider(params),
+    );
 
-    server.tool('billing_provider_update', 'Update a billing provider', {
-        uuid: z.string().describe('Provider UUID'),
-        name: z.string().optional().describe('New name'),
-        description: z.string().optional().describe('New description'),
-    }, async (params) => {
-        try { return toolResult(await client.updateBillingProvider(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'billing_provider_update',
+        'Update a billing provider',
+        UpdateInfraProviderCommand,
+        async (params) => client.updateBillingProvider(params),
+    );
 
     server.tool('billing_provider_delete', 'Delete a billing provider', {
         uuid: z.string().describe('Provider UUID'),
@@ -45,20 +52,21 @@ export function registerInfraBillingTools(server: McpServer, client: RemnawaveCl
         try { await client.deleteBillingProvider(uuid); return toolResult({ success: true, message: `Provider ${uuid} deleted` }); } catch (e) { return toolError(e); }
     });
 
-    server.tool('billing_node_create', 'Create a billing node', {
-        nodeUuid: z.string().describe('Node UUID'),
-        providerUuid: z.string().describe('Provider UUID'),
-        pricePerMonth: z.number().optional().describe('Monthly price'),
-    }, async (params) => {
-        try { return toolResult(await client.createBillingNode(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'billing_node_create',
+        'Create a billing node',
+        CreateInfraBillingNodeCommand,
+        async (params) => client.createBillingNode(params),
+    );
 
-    server.tool('billing_node_update', 'Update a billing node', {
-        uuid: z.string().describe('Billing node UUID'),
-        pricePerMonth: z.number().optional().describe('New monthly price'),
-    }, async (params) => {
-        try { return toolResult(await client.updateBillingNode(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'billing_node_update',
+        'Update a billing node',
+        UpdateInfraBillingNodeCommand,
+        async (params) => client.updateBillingNode(params),
+    );
 
     server.tool('billing_node_delete', 'Delete a billing node', {
         uuid: z.string().describe('Billing node UUID'),

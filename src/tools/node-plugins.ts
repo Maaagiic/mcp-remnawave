@@ -1,7 +1,11 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { RemnawaveClient } from '../client/index.js';
-import { toolResult, toolError } from './helpers.js';
+import { toolResult, toolError, contractTool } from './helpers.js';
+import {
+    CreateNodePluginCommand,
+    UpdateNodePluginCommand,
+} from '@remnawave/backend-contract';
 
 export function registerNodePluginTools(server: McpServer, client: RemnawaveClient, readonly: boolean) {
     server.tool('node_plugins_list', 'List all node plugins', {}, async () => {
@@ -24,18 +28,21 @@ export function registerNodePluginTools(server: McpServer, client: RemnawaveClie
 
     if (readonly) return;
 
-    server.tool('node_plugins_create', 'Create a new node plugin', {
-        name: z.string().describe('Plugin name'),
-    }, async (params) => {
-        try { return toolResult(await client.createNodePlugin(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'node_plugins_create',
+        'Create a node plugin',
+        CreateNodePluginCommand,
+        async (params) => client.createNodePlugin(params),
+    );
 
-    server.tool('node_plugins_update', 'Update a node plugin', {
-        uuid: z.string().describe('Plugin UUID'),
-        name: z.string().optional().describe('New name'),
-    }, async (params) => {
-        try { return toolResult(await client.updateNodePlugin(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'node_plugins_update',
+        'Update a node plugin, incl. pluginConfig',
+        UpdateNodePluginCommand,
+        async (params) => client.updateNodePlugin(params),
+    );
 
     server.tool('node_plugins_delete', 'Delete a node plugin', {
         uuid: z.string().describe('Plugin UUID'),

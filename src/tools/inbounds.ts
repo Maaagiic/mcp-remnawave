@@ -1,7 +1,11 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { RemnawaveClient } from '../client/index.js';
-import { toolResult, toolError } from './helpers.js';
+import { toolResult, toolError, contractTool } from './helpers.js';
+import {
+    CreateConfigProfileCommand,
+    UpdateConfigProfileCommand,
+} from '@remnawave/backend-contract';
 
 export function registerInboundTools(
     server: McpServer,
@@ -86,37 +90,20 @@ export function registerInboundTools(
 
     if (readonly) return;
 
-    server.tool(
+    contractTool(
+        server,
         'config_profiles_create',
-        'Create a new config profile',
-        {
-            name: z.string().describe('Profile name'),
-        },
-        async (params) => {
-            try {
-                const result = await client.createConfigProfile(params);
-                return toolResult(result);
-            } catch (e) {
-                return toolError(e);
-            }
-        },
+        'Create a config profile, optionally with a full xray config',
+        CreateConfigProfileCommand,
+        async (params) => client.createConfigProfile(params),
     );
 
-    server.tool(
+    contractTool(
+        server,
         'config_profiles_update',
-        'Update a config profile',
-        {
-            uuid: z.string().describe('Profile UUID'),
-            name: z.string().optional().describe('New name'),
-        },
-        async (params) => {
-            try {
-                const result = await client.updateConfigProfile(params);
-                return toolResult(result);
-            } catch (e) {
-                return toolError(e);
-            }
-        },
+        'Update a config profile: name and/or the full xray config body',
+        UpdateConfigProfileCommand,
+        async (params) => client.updateConfigProfile(params),
     );
 
     server.tool(
