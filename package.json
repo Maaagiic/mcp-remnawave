@@ -1,6 +1,6 @@
 {
   "name": "remnawave-mcp",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "MCP server for Remnawave proxy management panel",
   "type": "module",
   "bin": {
@@ -33,5 +33,13 @@
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maaagiic/mcp-remnawave.git"
+  },
+  "homepage": "https://github.com/Maaagiic/mcp-remnawave#readme",
+  "bugs": {
+    "url": "https://github.com/Maaagiic/mcp-remnawave/issues"
   }
 }
