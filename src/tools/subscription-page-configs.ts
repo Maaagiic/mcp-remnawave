@@ -1,7 +1,11 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { RemnawaveClient } from '../client/index.js';
-import { toolResult, toolError } from './helpers.js';
+import { toolResult, toolError, contractTool } from './helpers.js';
+import {
+    CreateSubscriptionPageConfigCommand,
+    UpdateSubscriptionPageConfigCommand,
+} from '@remnawave/backend-contract';
 
 export function registerSubPageConfigTools(server: McpServer, client: RemnawaveClient, readonly: boolean) {
     server.tool('sub_page_configs_list', 'List all subscription page configurations', {}, async () => {
@@ -16,18 +20,21 @@ export function registerSubPageConfigTools(server: McpServer, client: RemnawaveC
 
     if (readonly) return;
 
-    server.tool('sub_page_configs_create', 'Create a subscription page configuration', {
-        name: z.string().describe('Config name'),
-    }, async (params) => {
-        try { return toolResult(await client.createSubscriptionPageConfig(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'sub_page_configs_create',
+        'Create a subscription page configuration',
+        CreateSubscriptionPageConfigCommand,
+        async (params) => client.createSubscriptionPageConfig(params),
+    );
 
-    server.tool('sub_page_configs_update', 'Update a subscription page configuration', {
-        uuid: z.string().describe('Config UUID'),
-        name: z.string().optional().describe('New name'),
-    }, async (params) => {
-        try { return toolResult(await client.updateSubscriptionPageConfig(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'sub_page_configs_update',
+        'Update a subscription page configuration, incl. its config body',
+        UpdateSubscriptionPageConfigCommand,
+        async (params) => client.updateSubscriptionPageConfig(params),
+    );
 
     server.tool('sub_page_configs_delete', 'Delete a subscription page configuration', {
         uuid: z.string().describe('Config UUID'),

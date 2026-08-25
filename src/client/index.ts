@@ -34,15 +34,22 @@ export class RemnawaveClient {
             let errorMessage: string;
             try {
                 const errorBody = await res.json();
-                errorMessage =
-                    (errorBody as { message?: string }).message ||
-                    JSON.stringify(errorBody);
+                const msg = (errorBody as { message?: string }).message;
+                // Keep the full body: Remnawave puts field-level validation
+                // details in `errors`/`cause`, which a bare `message` hides.
+                const full = JSON.stringify(errorBody);
+                errorMessage = msg && full !== JSON.stringify({ message: msg })
+                    ? `${msg} | body=${full}`
+                    : full;
             } catch {
                 errorMessage = `HTTP ${res.status} ${res.statusText}`;
             }
             throw new Error(`Remnawave API error: ${errorMessage}`);
         }
-        return res.json() as Promise<T>;
+        // 204 / empty body: bulk operations on panel 3.x answer 2xx without JSON
+        const text = await res.text();
+        if (!text) return { ok: true, status: res.status } as T;
+        return JSON.parse(text) as T;
     }
 
     private async get<T = unknown>(path: string): Promise<T> {
@@ -69,15 +76,24 @@ export class RemnawaveClient {
     }
 
     // Users
+    //
+    // Panel 3.x: users are identified by numeric id (uuid was dropped). The
+    // by-telegram-id / by-email / by-tag / by-subscription-uuid routes are gone;
+    // search by those fields goes through list filters (TanStack-style).
 
-    async getUsers(start = 0, size = 25) {
-        return this.get(
-            `${REST_API.USERS.GET}?start=${start}&size=${size}`,
-        );
+    async getUsers(query: Record<string, unknown> = {}) {
+        const q = new URLSearchParams();
+        for (const [k, v] of Object.entries(query)) {
+            if (v === undefined || v === null) continue;
+            // filters / filterModes / sorting are expected as JSON strings in the query
+            q.set(k, typeof v === 'object' ? JSON.stringify(v) : String(v));
+        }
+        const qs = q.toString();
+        return this.get(qs ? `${REST_API.USERS.GET}?${qs}` : REST_API.USERS.GET);
     }
 
-    async getUserByUuid(uuid: string) {
-        return this.get(REST_API.USERS.GET_BY_UUID(uuid));
+    async getUserById(id: string | number) {
+        return this.get(REST_API.USERS.GET_BY_UUID(String(id)));
     }
 
     async getUserByUsername(username: string) {
@@ -88,24 +104,13 @@ export class RemnawaveClient {
         return this.get(REST_API.USERS.GET_BY.SHORT_UUID(shortUuid));
     }
 
-    async getUserByTelegramId(telegramId: string) {
-        return this.get(REST_API.USERS.GET_BY.TELEGRAM_ID(telegramId));
+    // REST_API.USERS.GET ends with '/', so 3.x-only paths are built via usersBase()
+    private usersBase() {
+        return REST_API.USERS.GET.replace(/\/+$/, '');
     }
 
-    async getUserByEmail(email: string) {
-        return this.get(REST_API.USERS.GET_BY.EMAIL(email));
-    }
-
-    async getUserByTag(tag: string) {
-        return this.get(REST_API.USERS.GET_BY.TAG(tag));
-    }
-
-    async getUserById(id: string) {
-        return this.get(REST_API.USERS.GET_BY.ID(id));
-    }
-
-    async getUserBySubscriptionUuid(subscriptionUuid: string) {
-        return this.get(REST_API.USERS.GET_BY.SUBSCRIPTION_UUID(subscriptionUuid));
+    async getUserAccessibleNodes(id: string | number) {
+        return this.get(`${this.usersBase()}/${id}/accessible-nodes`);
     }
 
     async getUserTags() {
@@ -124,24 +129,29 @@ export class RemnawaveClient {
         return this.patch(REST_API.USERS.UPDATE, params);
     }
 
-    async deleteUser(uuid: string) {
-        return this.delete(REST_API.USERS.DELETE(uuid));
+    async deleteUser(id: string | number) {
+        return this.delete(REST_API.USERS.DELETE(String(id)));
     }
 
-    async enableUser(uuid: string) {
-        return this.post(REST_API.USERS.ACTIONS.ENABLE(uuid));
+    async enableUser(id: string | number) {
+        return this.post(REST_API.USERS.ACTIONS.ENABLE(String(id)));
     }
 
-    async disableUser(uuid: string) {
-        return this.post(REST_API.USERS.ACTIONS.DISABLE(uuid));
+    async disableUser(id: string | number) {
+        return this.post(REST_API.USERS.ACTIONS.DISABLE(String(id)));
     }
 
-    async revokeUserSubscription(uuid: string) {
-        return this.post(REST_API.USERS.ACTIONS.REVOKE_SUBSCRIPTION(uuid));
+    async revokeUserSubscription(id: string | number) {
+        return this.post(REST_API.USERS.ACTIONS.REVOKE_SUBSCRIPTION(String(id)));
     }
 
-    async resetUserTraffic(uuid: string) {
-        return this.post(REST_API.USERS.ACTIONS.RESET_TRAFFIC(uuid));
+    async resetUserTraffic(id: string | number) {
+        return this.post(REST_API.USERS.ACTIONS.RESET_TRAFFIC(String(id)));
+    }
+
+    async extendUserExpiration(id: string | number, params: Record<string, unknown>) {
+        // Added in 3.x; not in contract 2.7.x — build the path by hand
+        return this.post(`${this.usersBase()}/${id}/actions/extend`, params);
     }
 
     async bulkDeleteUsersByStatus(params: Record<string, unknown>) {
@@ -338,8 +348,13 @@ export class RemnawaveClient {
         );
     }
 
-    async getSubscriptionByUuid(uuid: string) {
-        return this.get(REST_API.SUBSCRIPTIONS.GET_BY.UUID(uuid));
+    // Panel 3.x: by-uuid is gone (no user uuid any more), use by-id/:userId.
+    private subscriptionsBase() {
+        return REST_API.SUBSCRIPTIONS.GET.replace(/\/+$/, '');
+    }
+
+    async getSubscriptionByUserId(userId: string | number) {
+        return this.get(`${this.subscriptionsBase()}/by-id/${userId}`);
     }
 
     async getSubscriptionByUsername(username: string) {
@@ -358,8 +373,9 @@ export class RemnawaveClient {
         return this.get(REST_API.SUBSCRIPTIONS.SUBPAGE.GET_CONFIG(shortUuid));
     }
 
-    async getConnectionKeysByUuid(uuid: string) {
-        return this.get(REST_API.SUBSCRIPTIONS.GET_CONNECTION_KEYS_BY_UUID(uuid));
+    async getConnectionKeysByUserId(userId: string | number) {
+        // 3.x: connection-keys/:userId (numeric id)
+        return this.get(`${this.subscriptionsBase()}/connection-keys/${userId}`);
     }
 
     async getSubscriptionInfo(shortUuid: string) {
@@ -450,8 +466,8 @@ export class RemnawaveClient {
 
     // HWID
 
-    async getUserHwidDevices(userUuid: string) {
-        return this.get(REST_API.HWID.GET_USER_HWID_DEVICES(userUuid));
+    async getUserHwidDevices(userId: string | number) {
+        return this.get(REST_API.HWID.GET_USER_HWID_DEVICES(String(userId)));
     }
 
     async getAllHwidDevices() {
@@ -638,6 +654,20 @@ export class RemnawaveClient {
 
     async updateSettings(params: Record<string, unknown>) {
         return this.patch(REST_API.REMNAAWAVE_SETTINGS.UPDATE, params);
+    }
+
+    // Subscription Templates
+
+    async getSubscriptionTemplates() {
+        return this.get(REST_API.SUBSCRIPTION_TEMPLATE.GET_ALL);
+    }
+
+    async getSubscriptionTemplate(uuid: string) {
+        return this.get(REST_API.SUBSCRIPTION_TEMPLATE.GET(uuid));
+    }
+
+    async updateSubscriptionTemplate(params: Record<string, unknown>) {
+        return this.patch(REST_API.SUBSCRIPTION_TEMPLATE.UPDATE, params);
     }
 
     // Subscription Page Configs

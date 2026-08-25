@@ -1,7 +1,10 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { RemnawaveClient } from '../client/index.js';
-import { toolResult, toolError } from './helpers.js';
+import { toolResult, toolError, contractTool } from './helpers.js';
+import {
+    CreateUserHwidDeviceCommand,
+} from '@remnawave/backend-contract';
 
 export function registerHwidTools(
     server: McpServer,
@@ -12,11 +15,11 @@ export function registerHwidTools(
         'hwid_devices_list',
         'List HWID devices for a specific user',
         {
-            userUuid: z.string().describe('User UUID'),
+            userId: z.number().int().describe('Numeric user id (panel 3.x dropped user uuid)'),
         },
-        async ({ userUuid }) => {
+        async ({ userId }) => {
             try {
-                const result = await client.getUserHwidDevices(userUuid);
+                const result = await client.getUserHwidDevices(userId);
                 return toolResult(result);
             } catch (e) {
                 return toolError(e);
@@ -68,21 +71,12 @@ export function registerHwidTools(
 
     if (readonly) return;
 
-    server.tool(
+    contractTool(
+        server,
         'hwid_device_create',
-        'Create a HWID device entry for a user',
-        {
-            userUuid: z.string().describe('User UUID'),
-            hwid: z.string().describe('Hardware ID'),
-        },
-        async (params) => {
-            try {
-                const result = await client.createUserHwidDevice(params);
-                return toolResult(result);
-            } catch (e) {
-                return toolError(e);
-            }
-        },
+        'Register a HWID device for a user',
+        CreateUserHwidDeviceCommand,
+        async (params) => client.createUserHwidDevice(params),
     );
 
     server.tool(

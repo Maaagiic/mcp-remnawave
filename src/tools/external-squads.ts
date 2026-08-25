@@ -1,7 +1,11 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { RemnawaveClient } from '../client/index.js';
-import { toolResult, toolError } from './helpers.js';
+import { toolResult, toolError, contractTool } from './helpers.js';
+import {
+    CreateExternalSquadCommand,
+    UpdateExternalSquadCommand,
+} from '@remnawave/backend-contract';
 
 export function registerExternalSquadTools(server: McpServer, client: RemnawaveClient, readonly: boolean) {
     server.tool('external_squads_list', 'List all external squads', {}, async () => {
@@ -16,18 +20,21 @@ export function registerExternalSquadTools(server: McpServer, client: RemnawaveC
 
     if (readonly) return;
 
-    server.tool('external_squads_create', 'Create a new external squad', {
-        name: z.string().describe('Squad name'),
-    }, async (params) => {
-        try { return toolResult(await client.createExternalSquad(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'external_squads_create',
+        'Create an external squad',
+        CreateExternalSquadCommand,
+        async (params) => client.createExternalSquad(params),
+    );
 
-    server.tool('external_squads_update', 'Update an external squad', {
-        uuid: z.string().describe('Squad UUID'),
-        name: z.string().optional().describe('New squad name'),
-    }, async (params) => {
-        try { return toolResult(await client.updateExternalSquad(params)); } catch (e) { return toolError(e); }
-    });
+    contractTool(
+        server,
+        'external_squads_update',
+        'Update an external squad, incl. templates/hostOverrides/subscriptionSettings',
+        UpdateExternalSquadCommand,
+        async (params) => client.updateExternalSquad(params),
+    );
 
     server.tool('external_squads_delete', 'Delete an external squad', {
         uuid: z.string().describe('Squad UUID'),
