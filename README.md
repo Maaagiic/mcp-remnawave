@@ -179,21 +179,6 @@ only when readonly is off.
 - Multi-panel config lookup; readonly recommended by default; version bumped to **2.0.0**.
 </details>
 
-## 🧩 Design notes
-
-- **Never replace an object field with `z.any()`.** A JSON schema without `type` makes clients
-  send the value as a string and the panel rejects it with `expected object, received string`.
-  Use `z.object({}).passthrough()`.
-- The contract package is intentionally **not** bumped to 3.x: the current version reads fine
-  against 3.3.x, and the known write-side differences are handled explicitly.
-- The server runs from `dist/` — after changing `src/` run `npm run build` and reconnect.
-
-## ⚠️ Known limitations
-
-- `subscriptions_get_subpage_config` — the panel expects an object on this route; not yet mapped.
-- Endpoints added in 3.x that the installed contract does not know (geocheck, shared lists,
-  node integrations, bandwidth-stats routes) are not exposed.
-
 ## 🛠 Development
 
 ```bash
