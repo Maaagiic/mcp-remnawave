@@ -9,6 +9,27 @@ import {
 
 const SUBSCRIPTION_TYPES = ['XRAY_JSON', 'XRAY_BASE64', 'MIHOMO', 'STASH', 'CLASH', 'SINGBOX'] as const;
 
+/**
+ * Host schema fixes on top of contract 2.7.2:
+ * - the contract names the XHTTP field `xHttpExtraParams`, panel 3.x reads
+ *   `xhttpExtraParams` and silently ignores the old name (200 OK, field stays null);
+ * - these object fields are `z.unknown()` in the contract, which yields a JSON schema
+ *   without `type`, so clients send them as strings (`expected object, received string`).
+ */
+const hostObjectField = () => z.object({}).passthrough().nullable().optional();
+const HOST_OBJECT_FIELDS = {
+    xhttpExtraParams: hostObjectField().describe('XHTTP extra params (panel 3.x field name)'),
+    muxParams: hostObjectField(),
+    sockoptParams: hostObjectField(),
+    finalMask: hostObjectField(),
+};
+
+function fixHostSchema(command: { RequestSchema: z.ZodObject<z.ZodRawShape> }) {
+    return {
+        RequestSchema: command.RequestSchema.omit({ xHttpExtraParams: true }).extend(HOST_OBJECT_FIELDS),
+    };
+}
+
 export function registerHostTools(server: McpServer, client: RemnawaveClient, readonly: boolean) {
     server.tool(
         'hosts_list',
@@ -60,7 +81,7 @@ export function registerHostTools(server: McpServer, client: RemnawaveClient, re
         server,
         'hosts_create',
         'Create a new host (full request schema from the Remnawave contract)',
-        CreateHostCommand,
+        fixHostSchema(CreateHostCommand),
         async (params) => client.createHost(params),
     );
 
@@ -68,7 +89,7 @@ export function registerHostTools(server: McpServer, client: RemnawaveClient, re
         server,
         'hosts_update',
         'Update an existing host (full request schema from the Remnawave contract)',
-        UpdateHostCommand,
+        fixHostSchema(UpdateHostCommand),
         async (params) => client.updateHost(params),
     );
 

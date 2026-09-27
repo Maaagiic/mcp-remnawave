@@ -7,15 +7,49 @@ import {
     UpdateNodeCommand,
 } from '@remnawave/backend-contract';
 
+type Json = Record<string, any>;
+
+/** Shrink a node list for LLM context: 13 raw nodes are ~55 KB, mostly inbound objects and system info. */
+function compactNodes(result: unknown): unknown {
+    const nodes = (result as Json)?.response ?? result;
+    if (!Array.isArray(nodes)) return result;
+    return nodes.map((n: Json) => {
+        const { configProfile, provider, system, integrationUuids, ips, providerUuid, ...rest } = n;
+        const info = system?.info;
+        const stats = system?.stats;
+        return {
+            ...rest,
+            configProfile: configProfile && {
+                activeConfigProfileUuid: configProfile.activeConfigProfileUuid,
+                activeInbounds: (configProfile.activeInbounds ?? []).map((i: Json) => i.tag ?? i.uuid),
+            },
+            provider: provider?.name ?? null,
+            system: (info || stats) && {
+                cpus: info?.cpus,
+                kernel: info?.release,
+                memoryTotal: info?.memoryTotal,
+                memoryUsed: stats?.memoryUsed,
+                loadAvg: stats?.loadAvg,
+                uptime: stats?.uptime,
+                rxBytesPerSec: stats?.interface?.rxBytesPerSec,
+                txBytesPerSec: stats?.interface?.txBytesPerSec,
+            },
+        };
+    });
+}
+
 export function registerNodeTools(server: McpServer, client: RemnawaveClient, readonly: boolean) {
     server.tool(
         'nodes_list',
-        'List all Remnawave nodes',
-        {},
-        async () => {
+        'List all Remnawave nodes. Compact by default (~4 KB less per node): inbounds as tags, provider as name, ' +
+            'system info trimmed. Pass full=true for the raw panel response, or use nodes_get for one node.',
+        {
+            full: z.boolean().optional().describe('Return the raw panel response (large: ~4 KB per node)'),
+        },
+        async ({ full }) => {
             try {
                 const result = await client.getNodes();
-                return toolResult(result);
+                return toolResult(full ? result : compactNodes(result));
             } catch (e) {
                 return toolError(e);
             }

@@ -135,6 +135,8 @@ only when readonly is off.
 
 - `config_profiles_update` with `config` **replaces** the whole xray config of the profile — read, patch, write back.
 - `hosts_create` requires `inbound: { configProfileUuid, configProfileInboundUuid }`.
+- XHTTP host params go in `xhttpExtraParams` (panel 3.x name; the contract's `xHttpExtraParams` is silently ignored by the panel).
+- `nodes_list` is compact by default (inbounds as tags, trimmed system info); pass `full: true` for the raw response.
 </details>
 
 <details>
