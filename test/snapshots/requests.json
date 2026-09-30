@@ -1,0 +1,4098 @@
+{
+  "api_request": {
+    "args": {
+      "method": "POST",
+      "path": "/api/example",
+      "query": {
+        "a": 1,
+        "list": [
+          1,
+          2
+        ]
+      },
+      "body": {
+        "key": "value"
+      }
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/example?a=1&list=%5B1%2C2%5D",
+        "body": {
+          "key": "value"
+        }
+      }
+    ]
+  },
+  "api_tokens_create": {
+    "args": {
+      "name": "TEST",
+      "expiresInDays": 1,
+      "scopes": [
+        "TEST"
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/tokens/",
+        "body": {
+          "name": "TEST",
+          "expiresInDays": 1,
+          "scopes": [
+            "TEST"
+          ]
+        }
+      }
+    ]
+  },
+  "api_tokens_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/tokens/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "api_tokens_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/tokens/"
+      }
+    ]
+  },
+  "api_tokens_scopes": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/tokens/scopes"
+      }
+    ]
+  },
+  "auth_status": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/auth/status"
+      }
+    ]
+  },
+  "bandwidth_node_users": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "start": "2030-01-01",
+      "end": "2030-01-01",
+      "topUsersLimit": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/bandwidth-stats/nodes/00000000-0000-4000-8000-000000000001/users?start=2030-01-01&end=2030-01-01&topUsersLimit=1"
+      }
+    ]
+  },
+  "bandwidth_nodes_usage": {
+    "args": {
+      "start": "2030-01-01",
+      "end": "2030-01-01",
+      "topNodesLimit": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/bandwidth-stats/nodes/?start=2030-01-01&end=2030-01-01&topNodesLimit=1"
+      }
+    ]
+  },
+  "bandwidth_nodes_usage_threshold": {
+    "args": {
+      "start": "2030-01-01",
+      "end": "2030-01-01",
+      "minTotalBytes": 1,
+      "nodesUuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/bandwidth-stats/nodes/usage?start=2030-01-01&end=2030-01-01&minTotalBytes=1",
+        "body": {
+          "nodesUuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    ]
+  },
+  "bandwidth_nodes_users": {
+    "args": {
+      "start": "2030-01-01",
+      "end": "2030-01-01",
+      "topUsersLimit": 1,
+      "nodesUuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/bandwidth-stats/nodes/users?start=2030-01-01&end=2030-01-01&topUsersLimit=1",
+        "body": {
+          "nodesUuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    ]
+  },
+  "bandwidth_squad_usage": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "start": "2030-01-01",
+      "end": "2030-01-01",
+      "minTotalBytes": 1,
+      "limit": 1,
+      "cursor": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/bandwidth-stats/internal-squads/00000000-0000-4000-8000-000000000001/usage?start=2030-01-01&end=2030-01-01&minTotalBytes=1&limit=1&cursor=1"
+      }
+    ]
+  },
+  "bandwidth_squad_user_usage": {
+    "args": {
+      "squadUuid": "00000000-0000-4000-8000-000000000001",
+      "userId": 1,
+      "start": "2030-01-01",
+      "end": "2030-01-01"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/bandwidth-stats/internal-squads/00000000-0000-4000-8000-000000000001/users/1/usage?start=2030-01-01&end=2030-01-01"
+      }
+    ]
+  },
+  "bandwidth_user_usage": {
+    "args": {
+      "userId": 1,
+      "start": "2030-01-01",
+      "end": "2030-01-01",
+      "topNodesLimit": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/bandwidth-stats/users/1?start=2030-01-01&end=2030-01-01&topNodesLimit=1"
+      }
+    ]
+  },
+  "billing_history_create": {
+    "args": {
+      "providerUuid": "00000000-0000-4000-8000-000000000001",
+      "amount": 1,
+      "billedAt": "2030-01-01T00:00:00.000Z"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/infra-billing/history",
+        "body": {
+          "providerUuid": "00000000-0000-4000-8000-000000000001",
+          "amount": 1,
+          "billedAt": "2030-01-01T00:00:00.000Z"
+        }
+      }
+    ]
+  },
+  "billing_history_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/infra-billing/history/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "billing_history_list": {
+    "args": {
+      "start": 1,
+      "size": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/infra-billing/history?start=1&size=1"
+      }
+    ]
+  },
+  "billing_node_create": {
+    "args": {
+      "providerUuid": "00000000-0000-4000-8000-000000000001",
+      "nodeUuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "nextBillingAt": "2030-01-01T00:00:00.000Z"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/infra-billing/nodes",
+        "body": {
+          "providerUuid": "00000000-0000-4000-8000-000000000001",
+          "nodeUuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "nextBillingAt": "2030-01-01T00:00:00.000Z"
+        }
+      }
+    ]
+  },
+  "billing_node_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/infra-billing/nodes/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "billing_node_update": {
+    "args": {
+      "uuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "nextBillingAt": "2030-01-01T00:00:00.000Z"
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/infra-billing/nodes",
+        "body": {
+          "uuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "nextBillingAt": "2030-01-01T00:00:00.000Z"
+        }
+      }
+    ]
+  },
+  "billing_nodes_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/infra-billing/nodes"
+      }
+    ]
+  },
+  "billing_provider_create": {
+    "args": {
+      "name": "TEST",
+      "faviconLink": "https://example.com",
+      "loginUrl": "https://example.com"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/infra-billing/providers",
+        "body": {
+          "name": "TEST",
+          "faviconLink": "https://example.com",
+          "loginUrl": "https://example.com"
+        }
+      }
+    ]
+  },
+  "billing_provider_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/infra-billing/providers/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "billing_provider_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/infra-billing/providers/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "billing_provider_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "faviconLink": "https://example.com",
+      "loginUrl": "https://example.com"
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/infra-billing/providers",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "faviconLink": "https://example.com",
+          "loginUrl": "https://example.com"
+        }
+      }
+    ]
+  },
+  "billing_providers_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/infra-billing/providers"
+      }
+    ]
+  },
+  "config_profiles_create": {
+    "args": {
+      "name": "TEST",
+      "config": {}
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/config-profiles/",
+        "body": {
+          "name": "TEST",
+          "config": {}
+        }
+      }
+    ]
+  },
+  "config_profiles_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/config-profiles/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "config_profiles_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/config-profiles/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "config_profiles_get_computed_config": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/config-profiles/00000000-0000-4000-8000-000000000001/computed-config"
+      }
+    ]
+  },
+  "config_profiles_get_inbounds": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/config-profiles/00000000-0000-4000-8000-000000000001/inbounds"
+      }
+    ]
+  },
+  "config_profiles_list": {
+    "args": {
+      "full": true
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/config-profiles/"
+      }
+    ]
+  },
+  "config_profiles_reorder": {
+    "args": {
+      "items": [
+        {
+          "viewPosition": 1,
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/config-profiles/actions/reorder",
+        "body": {
+          "items": [
+            {
+              "viewPosition": 1,
+              "uuid": "00000000-0000-4000-8000-000000000001"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "config_profiles_set_tags": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "tags": [
+        "TEST"
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/config-profiles/tags",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "tags": [
+            "TEST"
+          ]
+        }
+      }
+    ]
+  },
+  "config_profiles_tags_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/config-profiles/tags"
+      }
+    ]
+  },
+  "config_profiles_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "config": {}
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/config-profiles/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "config": {}
+        }
+      }
+    ]
+  },
+  "connections_by_node_request": {
+    "args": {
+      "nodeUuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/connections/by-node/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "connections_by_node_result": {
+    "args": {
+      "jobId": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/connections/by-node/TEST"
+      }
+    ]
+  },
+  "connections_by_user_request": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/connections/by-user/1"
+      }
+    ]
+  },
+  "connections_by_user_result": {
+    "args": {
+      "jobId": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/connections/by-user/TEST"
+      }
+    ]
+  },
+  "connections_drop": {
+    "args": {
+      "dropBy": {
+        "by": "userIds",
+        "userIds": [
+          1
+        ]
+      },
+      "targetNodes": {
+        "target": "allNodes"
+      }
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/connections/drop",
+        "body": {
+          "dropBy": {
+            "by": "userIds",
+            "userIds": [
+              1
+            ]
+          },
+          "targetNodes": {
+            "target": "allNodes"
+          }
+        }
+      }
+    ]
+  },
+  "connections_geocheck_request": {
+    "args": {
+      "nodeUuid": "00000000-0000-4000-8000-000000000001",
+      "ip": "192.0.2.1"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/connections/geocheck/00000000-0000-4000-8000-000000000001",
+        "body": {
+          "ip": "192.0.2.1"
+        }
+      }
+    ]
+  },
+  "connections_geocheck_result": {
+    "args": {
+      "jobId": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/connections/geocheck/TEST"
+      }
+    ]
+  },
+  "external_squads_add_all_users": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/external-squads/00000000-0000-4000-8000-000000000001/bulk-actions/add-users"
+      }
+    ]
+  },
+  "external_squads_create": {
+    "args": {
+      "name": "TEST"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/external-squads/",
+        "body": {
+          "name": "TEST"
+        }
+      }
+    ]
+  },
+  "external_squads_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/external-squads/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "external_squads_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/external-squads/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "external_squads_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/external-squads/"
+      }
+    ]
+  },
+  "external_squads_remove_all_users": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/external-squads/00000000-0000-4000-8000-000000000001/bulk-actions/remove-users"
+      }
+    ]
+  },
+  "external_squads_reorder": {
+    "args": {
+      "items": [
+        {
+          "viewPosition": 1,
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/external-squads/actions/reorder",
+        "body": {
+          "items": [
+            {
+              "viewPosition": 1,
+              "uuid": "00000000-0000-4000-8000-000000000001"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "external_squads_set_tags": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "tags": [
+        "TEST"
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/external-squads/tags",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "tags": [
+            "TEST"
+          ]
+        }
+      }
+    ]
+  },
+  "external_squads_tags_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/external-squads/tags"
+      }
+    ]
+  },
+  "external_squads_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "templates": [
+        {
+          "templateUuid": "00000000-0000-4000-8000-000000000001",
+          "templateType": "XRAY_JSON"
+        }
+      ],
+      "subscriptionSettings": {
+        "serveJsonAtBaseSubscription": true,
+        "isShowCustomRemarks": true,
+        "randomizeHosts": true
+      },
+      "hostOverrides": {
+        "serverDescription": "TEST",
+        "vlessRouteId": 1
+      },
+      "responseHeadersAdd": {},
+      "responseHeadersRemove": [
+        "TEST"
+      ],
+      "hwidSettings": {
+        "enabled": true,
+        "fallbackDeviceLimit": 1,
+        "maxDevicesAnnounce": "TEST"
+      },
+      "customRemarks": {
+        "expiredUsers": [
+          "TEST"
+        ],
+        "limitedUsers": [
+          "TEST"
+        ],
+        "disabledUsers": [
+          "TEST"
+        ],
+        "emptyHosts": [
+          "TEST"
+        ],
+        "HWIDMaxDevicesExceeded": [
+          "TEST"
+        ],
+        "HWIDNotSupported": [
+          "TEST"
+        ]
+      },
+      "subpageConfigUuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/external-squads/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "templates": [
+            {
+              "templateUuid": "00000000-0000-4000-8000-000000000001",
+              "templateType": "XRAY_JSON"
+            }
+          ],
+          "subscriptionSettings": {
+            "serveJsonAtBaseSubscription": true,
+            "isShowCustomRemarks": true,
+            "randomizeHosts": true
+          },
+          "hostOverrides": {
+            "serverDescription": "TEST",
+            "vlessRouteId": 1
+          },
+          "responseHeadersAdd": {},
+          "responseHeadersRemove": [
+            "TEST"
+          ],
+          "hwidSettings": {
+            "enabled": true,
+            "fallbackDeviceLimit": 1,
+            "maxDevicesAnnounce": "TEST"
+          },
+          "customRemarks": {
+            "expiredUsers": [
+              "TEST"
+            ],
+            "limitedUsers": [
+              "TEST"
+            ],
+            "disabledUsers": [
+              "TEST"
+            ],
+            "emptyHosts": [
+              "TEST"
+            ],
+            "HWIDMaxDevicesExceeded": [
+              "TEST"
+            ],
+            "HWIDNotSupported": [
+              "TEST"
+            ]
+          },
+          "subpageConfigUuid": "00000000-0000-4000-8000-000000000001"
+        }
+      }
+    ]
+  },
+  "hosts_bulk_delete": {
+    "args": {
+      "uuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/hosts/bulk/delete",
+        "body": {
+          "uuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    ]
+  },
+  "hosts_bulk_disable": {
+    "args": {
+      "uuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/hosts/bulk/disable",
+        "body": {
+          "uuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    ]
+  },
+  "hosts_bulk_enable": {
+    "args": {
+      "uuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/hosts/bulk/enable",
+        "body": {
+          "uuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    ]
+  },
+  "hosts_bulk_update": {
+    "args": {
+      "inbound": {
+        "configProfileUuid": "00000000-0000-4000-8000-000000000001",
+        "configProfileInboundUuid": "00000000-0000-4000-8000-000000000001"
+      },
+      "remark": "TEST",
+      "address": "TEST",
+      "port": 1,
+      "path": "TEST",
+      "sni": "TEST",
+      "host": "TEST",
+      "alpn": "h3",
+      "fingerprint": "TEST",
+      "isDisabled": true,
+      "securityLayer": "DEFAULT",
+      "xhttpExtraParams": {},
+      "muxParams": {},
+      "sockoptParams": {},
+      "finalMask": {},
+      "serverDescription": "TEST",
+      "tags": [
+        "TEST"
+      ],
+      "isHidden": true,
+      "overrideSniFromAddress": true,
+      "keepSniBlank": true,
+      "vlessRouteId": 1,
+      "pinnedPeerCertSha256": "TEST",
+      "verifyPeerCertByName": "TEST",
+      "shuffleHost": true,
+      "mihomoX25519": true,
+      "mihomoIpVersion": "dual",
+      "nodes": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "xrayJsonTemplateUuid": "00000000-0000-4000-8000-000000000001",
+      "excludeFromSubscriptionTypes": [
+        "XRAY_JSON"
+      ],
+      "mapper": {
+        "xrayJson": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ],
+        "mihomo": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ],
+        "base64": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ],
+        "singbox": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ]
+      },
+      "internalSquads": {
+        "mode": "EXCLUDE",
+        "squads": [
+          "00000000-0000-4000-8000-000000000001"
+        ]
+      },
+      "uuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/hosts/bulk/update",
+        "body": {
+          "inbound": {
+            "configProfileUuid": "00000000-0000-4000-8000-000000000001",
+            "configProfileInboundUuid": "00000000-0000-4000-8000-000000000001"
+          },
+          "remark": "TEST",
+          "address": "TEST",
+          "port": 1,
+          "path": "TEST",
+          "sni": "TEST",
+          "host": "TEST",
+          "alpn": "h3",
+          "fingerprint": "TEST",
+          "isDisabled": true,
+          "securityLayer": "DEFAULT",
+          "xhttpExtraParams": {},
+          "muxParams": {},
+          "sockoptParams": {},
+          "finalMask": {},
+          "serverDescription": "TEST",
+          "tags": [
+            "TEST"
+          ],
+          "isHidden": true,
+          "overrideSniFromAddress": true,
+          "keepSniBlank": true,
+          "vlessRouteId": 1,
+          "pinnedPeerCertSha256": "TEST",
+          "verifyPeerCertByName": "TEST",
+          "shuffleHost": true,
+          "mihomoX25519": true,
+          "mihomoIpVersion": "dual",
+          "nodes": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "xrayJsonTemplateUuid": "00000000-0000-4000-8000-000000000001",
+          "excludeFromSubscriptionTypes": [
+            "XRAY_JSON"
+          ],
+          "mapper": {
+            "xrayJson": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ],
+            "mihomo": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ],
+            "base64": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ],
+            "singbox": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ]
+          },
+          "internalSquads": {
+            "mode": "EXCLUDE",
+            "squads": [
+              "00000000-0000-4000-8000-000000000001"
+            ]
+          },
+          "uuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    ]
+  },
+  "hosts_clone": {
+    "args": {
+      "cloneFromUuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/hosts/actions/clone",
+        "body": {
+          "cloneFromUuid": "00000000-0000-4000-8000-000000000001"
+        }
+      }
+    ]
+  },
+  "hosts_create": {
+    "args": {
+      "inbound": {
+        "configProfileUuid": "00000000-0000-4000-8000-000000000001",
+        "configProfileInboundUuid": "00000000-0000-4000-8000-000000000001"
+      },
+      "remark": "TEST",
+      "address": "TEST",
+      "port": 1,
+      "path": "TEST",
+      "sni": "TEST",
+      "host": "TEST",
+      "alpn": "h3",
+      "fingerprint": "TEST",
+      "isDisabled": true,
+      "securityLayer": "DEFAULT",
+      "xhttpExtraParams": {},
+      "muxParams": {},
+      "sockoptParams": {},
+      "finalMask": {},
+      "serverDescription": "TEST",
+      "tags": [
+        "TEST"
+      ],
+      "isHidden": true,
+      "overrideSniFromAddress": true,
+      "keepSniBlank": true,
+      "pinnedPeerCertSha256": "TEST",
+      "verifyPeerCertByName": "TEST",
+      "vlessRouteId": 1,
+      "shuffleHost": true,
+      "mihomoX25519": true,
+      "mihomoIpVersion": "dual",
+      "nodes": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "xrayJsonTemplateUuid": "00000000-0000-4000-8000-000000000001",
+      "excludeFromSubscriptionTypes": [
+        "XRAY_JSON"
+      ],
+      "mapper": {
+        "xrayJson": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ],
+        "mihomo": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ],
+        "base64": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ],
+        "singbox": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ]
+      },
+      "internalSquads": {
+        "mode": "EXCLUDE",
+        "squads": [
+          "00000000-0000-4000-8000-000000000001"
+        ]
+      }
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/hosts/",
+        "body": {
+          "inbound": {
+            "configProfileUuid": "00000000-0000-4000-8000-000000000001",
+            "configProfileInboundUuid": "00000000-0000-4000-8000-000000000001"
+          },
+          "remark": "TEST",
+          "address": "TEST",
+          "port": 1,
+          "path": "TEST",
+          "sni": "TEST",
+          "host": "TEST",
+          "alpn": "h3",
+          "fingerprint": "TEST",
+          "isDisabled": true,
+          "securityLayer": "DEFAULT",
+          "xhttpExtraParams": {},
+          "muxParams": {},
+          "sockoptParams": {},
+          "finalMask": {},
+          "serverDescription": "TEST",
+          "tags": [
+            "TEST"
+          ],
+          "isHidden": true,
+          "overrideSniFromAddress": true,
+          "keepSniBlank": true,
+          "pinnedPeerCertSha256": "TEST",
+          "verifyPeerCertByName": "TEST",
+          "vlessRouteId": 1,
+          "shuffleHost": true,
+          "mihomoX25519": true,
+          "mihomoIpVersion": "dual",
+          "nodes": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "xrayJsonTemplateUuid": "00000000-0000-4000-8000-000000000001",
+          "excludeFromSubscriptionTypes": [
+            "XRAY_JSON"
+          ],
+          "mapper": {
+            "xrayJson": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ],
+            "mihomo": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ],
+            "base64": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ],
+            "singbox": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ]
+          },
+          "internalSquads": {
+            "mode": "EXCLUDE",
+            "squads": [
+              "00000000-0000-4000-8000-000000000001"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "hosts_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/hosts/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "hosts_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/hosts/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "hosts_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/hosts/"
+      }
+    ]
+  },
+  "hosts_reorder": {
+    "args": {
+      "hosts": [
+        {
+          "viewPosition": 1,
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/hosts/actions/reorder",
+        "body": {
+          "hosts": [
+            {
+              "viewPosition": 1,
+              "uuid": "00000000-0000-4000-8000-000000000001"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "hosts_tags_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/hosts/tags"
+      }
+    ]
+  },
+  "hosts_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "inbound": {
+        "configProfileUuid": "00000000-0000-4000-8000-000000000001",
+        "configProfileInboundUuid": "00000000-0000-4000-8000-000000000001"
+      },
+      "remark": "TEST",
+      "address": "TEST",
+      "port": 1,
+      "path": "TEST",
+      "sni": "TEST",
+      "host": "TEST",
+      "alpn": "h3",
+      "fingerprint": "TEST",
+      "isDisabled": true,
+      "securityLayer": "DEFAULT",
+      "xhttpExtraParams": {},
+      "muxParams": {},
+      "sockoptParams": {},
+      "finalMask": {},
+      "serverDescription": "TEST",
+      "tags": [
+        "TEST"
+      ],
+      "isHidden": true,
+      "overrideSniFromAddress": true,
+      "keepSniBlank": true,
+      "vlessRouteId": 1,
+      "pinnedPeerCertSha256": "TEST",
+      "verifyPeerCertByName": "TEST",
+      "shuffleHost": true,
+      "mihomoX25519": true,
+      "mihomoIpVersion": "dual",
+      "nodes": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "xrayJsonTemplateUuid": "00000000-0000-4000-8000-000000000001",
+      "excludeFromSubscriptionTypes": [
+        "XRAY_JSON"
+      ],
+      "mapper": {
+        "xrayJson": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ],
+        "mihomo": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ],
+        "base64": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ],
+        "singbox": [
+          {
+            "op": "copy",
+            "from": "TEST",
+            "to": "TEST"
+          }
+        ]
+      },
+      "internalSquads": {
+        "mode": "EXCLUDE",
+        "squads": [
+          "00000000-0000-4000-8000-000000000001"
+        ]
+      }
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/hosts/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "inbound": {
+            "configProfileUuid": "00000000-0000-4000-8000-000000000001",
+            "configProfileInboundUuid": "00000000-0000-4000-8000-000000000001"
+          },
+          "remark": "TEST",
+          "address": "TEST",
+          "port": 1,
+          "path": "TEST",
+          "sni": "TEST",
+          "host": "TEST",
+          "alpn": "h3",
+          "fingerprint": "TEST",
+          "isDisabled": true,
+          "securityLayer": "DEFAULT",
+          "xhttpExtraParams": {},
+          "muxParams": {},
+          "sockoptParams": {},
+          "finalMask": {},
+          "serverDescription": "TEST",
+          "tags": [
+            "TEST"
+          ],
+          "isHidden": true,
+          "overrideSniFromAddress": true,
+          "keepSniBlank": true,
+          "vlessRouteId": 1,
+          "pinnedPeerCertSha256": "TEST",
+          "verifyPeerCertByName": "TEST",
+          "shuffleHost": true,
+          "mihomoX25519": true,
+          "mihomoIpVersion": "dual",
+          "nodes": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "xrayJsonTemplateUuid": "00000000-0000-4000-8000-000000000001",
+          "excludeFromSubscriptionTypes": [
+            "XRAY_JSON"
+          ],
+          "mapper": {
+            "xrayJson": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ],
+            "mihomo": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ],
+            "base64": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ],
+            "singbox": [
+              {
+                "op": "copy",
+                "from": "TEST",
+                "to": "TEST"
+              }
+            ]
+          },
+          "internalSquads": {
+            "mode": "EXCLUDE",
+            "squads": [
+              "00000000-0000-4000-8000-000000000001"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "hwid_device_create": {
+    "args": {
+      "hwid": "ABCDEFGHIJ12",
+      "userId": 1,
+      "platform": "TEST",
+      "osVersion": "TEST",
+      "deviceModel": "TEST",
+      "userAgent": "TEST",
+      "requestIp": "TEST"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/hwid/devices",
+        "body": {
+          "hwid": "ABCDEFGHIJ12",
+          "userId": 1,
+          "platform": "TEST",
+          "osVersion": "TEST",
+          "deviceModel": "TEST",
+          "userAgent": "TEST",
+          "requestIp": "TEST"
+        }
+      }
+    ]
+  },
+  "hwid_device_delete": {
+    "args": {
+      "userId": 1,
+      "hwid": "ABCDEFGHIJ12"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/hwid/devices/delete",
+        "body": {
+          "userId": 1,
+          "hwid": "ABCDEFGHIJ12"
+        }
+      }
+    ]
+  },
+  "hwid_devices_delete_all": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/hwid/devices/delete-all",
+        "body": {
+          "userId": 1
+        }
+      }
+    ]
+  },
+  "hwid_devices_list": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/hwid/devices/1"
+      }
+    ]
+  },
+  "hwid_devices_list_all": {
+    "args": {
+      "start": 1,
+      "size": 1,
+      "filters": [
+        {
+          "id": "TEST",
+          "value": {}
+        }
+      ],
+      "filterModes": {},
+      "globalFilterMode": "TEST",
+      "sorting": [
+        {
+          "id": "TEST",
+          "desc": true
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/hwid/devices?start=1&size=1&filters=%5B%7B%22id%22%3A%22TEST%22%2C%22value%22%3A%7B%7D%7D%5D&filterModes=%7B%7D&globalFilterMode=TEST&sorting=%5B%7B%22id%22%3A%22TEST%22%2C%22desc%22%3Atrue%7D%5D"
+      }
+    ]
+  },
+  "hwid_stats": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/hwid/devices/stats"
+      }
+    ]
+  },
+  "hwid_top_users": {
+    "args": {
+      "start": 1,
+      "size": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/hwid/devices/top-users?start=1&size=1"
+      }
+    ]
+  },
+  "inbounds_list": {
+    "args": {
+      "full": true
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/config-profiles/inbounds"
+      }
+    ]
+  },
+  "keygen_get": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/keygen/"
+      }
+    ]
+  },
+  "metadata_node_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/metadata/node/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "metadata_node_upsert": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "metadata": {}
+    },
+    "requests": [
+      {
+        "method": "PUT",
+        "path": "/api/metadata/node/00000000-0000-4000-8000-000000000001",
+        "body": {
+          "metadata": {}
+        }
+      }
+    ]
+  },
+  "metadata_user_get": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/metadata/user/1"
+      }
+    ]
+  },
+  "metadata_user_upsert": {
+    "args": {
+      "userId": 1,
+      "metadata": {}
+    },
+    "requests": [
+      {
+        "method": "PUT",
+        "path": "/api/metadata/user/1",
+        "body": {
+          "metadata": {}
+        }
+      }
+    ]
+  },
+  "node_integrations_create": {
+    "args": {
+      "name": "TEST",
+      "description": "TEST",
+      "config": {}
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/node-integrations/",
+        "body": {
+          "name": "TEST",
+          "description": "TEST",
+          "config": {}
+        }
+      }
+    ]
+  },
+  "node_integrations_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/node-integrations/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "node_integrations_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/node-integrations/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "node_integrations_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/node-integrations/"
+      }
+    ]
+  },
+  "node_integrations_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "description": "TEST",
+      "config": {},
+      "restartNodes": true
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/node-integrations/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "description": "TEST",
+          "config": {},
+          "restartNodes": true
+        }
+      }
+    ]
+  },
+  "node_plugins_clone": {
+    "args": {
+      "cloneFromUuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/node-plugins/actions/clone",
+        "body": {
+          "cloneFromUuid": "00000000-0000-4000-8000-000000000001"
+        }
+      }
+    ]
+  },
+  "node_plugins_create": {
+    "args": {
+      "name": "TEST"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/node-plugins/",
+        "body": {
+          "name": "TEST"
+        }
+      }
+    ]
+  },
+  "node_plugins_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/node-plugins/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "node_plugins_execute": {
+    "args": {
+      "command": {
+        "command": "blockIps",
+        "ips": [
+          {
+            "ip": "192.0.2.1",
+            "timeout": 1
+          }
+        ]
+      },
+      "targetNodes": {
+        "target": "allNodes"
+      }
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/node-plugins/executor",
+        "body": {
+          "command": {
+            "command": "blockIps",
+            "ips": [
+              {
+                "ip": "192.0.2.1",
+                "timeout": 1
+              }
+            ]
+          },
+          "targetNodes": {
+            "target": "allNodes"
+          }
+        }
+      }
+    ]
+  },
+  "node_plugins_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/node-plugins/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "node_plugins_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/node-plugins/"
+      }
+    ]
+  },
+  "node_plugins_reorder": {
+    "args": {
+      "items": [
+        {
+          "viewPosition": 1,
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/node-plugins/actions/reorder",
+        "body": {
+          "items": [
+            {
+              "viewPosition": 1,
+              "uuid": "00000000-0000-4000-8000-000000000001"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "node_plugins_set_tags": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "tags": [
+        "TEST"
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/node-plugins/tags",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "tags": [
+            "TEST"
+          ]
+        }
+      }
+    ]
+  },
+  "node_plugins_sync": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/node-plugins/actions/sync",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      }
+    ]
+  },
+  "node_plugins_tags_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/node-plugins/tags"
+      }
+    ]
+  },
+  "node_plugins_torrent_reports": {
+    "args": {
+      "start": 1,
+      "size": 1,
+      "filters": [
+        {
+          "id": "TEST",
+          "value": {}
+        }
+      ],
+      "filterModes": {},
+      "globalFilterMode": "TEST",
+      "sorting": [
+        {
+          "id": "TEST",
+          "desc": true
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/node-plugins/torrent-blocker?start=1&size=1&filters=%5B%7B%22id%22%3A%22TEST%22%2C%22value%22%3A%7B%7D%7D%5D&filterModes=%7B%7D&globalFilterMode=TEST&sorting=%5B%7B%22id%22%3A%22TEST%22%2C%22desc%22%3Atrue%7D%5D"
+      }
+    ]
+  },
+  "node_plugins_torrent_stats": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/node-plugins/torrent-blocker/stats"
+      }
+    ]
+  },
+  "node_plugins_torrent_truncate": {
+    "args": {},
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/node-plugins/torrent-blocker/truncate"
+      }
+    ]
+  },
+  "node_plugins_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "pluginConfig": {}
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/node-plugins/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "pluginConfig": {}
+        }
+      }
+    ]
+  },
+  "nodes_bulk_actions": {
+    "args": {
+      "uuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "action": "ENABLE"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/bulk-actions",
+        "body": {
+          "uuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "action": "ENABLE"
+        }
+      }
+    ]
+  },
+  "nodes_bulk_profile_modification": {
+    "args": {
+      "uuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "configProfile": {
+        "activeConfigProfileUuid": "00000000-0000-4000-8000-000000000001",
+        "activeInbounds": [
+          "00000000-0000-4000-8000-000000000001"
+        ]
+      }
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/bulk-actions/profile-modification",
+        "body": {
+          "uuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "configProfile": {
+            "activeConfigProfileUuid": "00000000-0000-4000-8000-000000000001",
+            "activeInbounds": [
+              "00000000-0000-4000-8000-000000000001"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "nodes_bulk_update": {
+    "args": {
+      "uuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "fields": {
+        "countryCode": "TE",
+        "consumptionMultiplier": 1,
+        "nodeConsumptionMultiplier": 1,
+        "providerUuid": "00000000-0000-4000-8000-000000000001",
+        "tags": [
+          "TEST"
+        ],
+        "activePluginUuid": "00000000-0000-4000-8000-000000000001",
+        "integrationUuids": [
+          "00000000-0000-4000-8000-000000000001"
+        ],
+        "note": "TEST"
+      }
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/bulk-actions/update",
+        "body": {
+          "uuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "fields": {
+            "countryCode": "TE",
+            "consumptionMultiplier": 1,
+            "nodeConsumptionMultiplier": 1,
+            "providerUuid": "00000000-0000-4000-8000-000000000001",
+            "tags": [
+              "TEST"
+            ],
+            "activePluginUuid": "00000000-0000-4000-8000-000000000001",
+            "integrationUuids": [
+              "00000000-0000-4000-8000-000000000001"
+            ],
+            "note": "TEST"
+          }
+        }
+      }
+    ]
+  },
+  "nodes_create": {
+    "args": {
+      "name": "TEST",
+      "address": "TEST",
+      "port": 1,
+      "proxyUrl": "socks5://127.0.0.1:1080",
+      "isTrafficTrackingActive": true,
+      "trafficLimitBytes": 1,
+      "notifyPercent": 1,
+      "trafficResetDay": 1,
+      "countryCode": "TE",
+      "consumptionMultiplier": 1,
+      "nodeConsumptionMultiplier": 1,
+      "configProfile": {
+        "activeConfigProfileUuid": "00000000-0000-4000-8000-000000000001",
+        "activeInbounds": [
+          "00000000-0000-4000-8000-000000000001"
+        ]
+      },
+      "providerUuid": "00000000-0000-4000-8000-000000000001",
+      "tags": [
+        "TEST"
+      ],
+      "activePluginUuid": "00000000-0000-4000-8000-000000000001",
+      "integrationUuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "note": "TEST",
+      "ips": [
+        {
+          "ip": "192.0.2.1",
+          "status": "INBOUND"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/",
+        "body": {
+          "name": "TEST",
+          "address": "TEST",
+          "port": 1,
+          "proxyUrl": "socks5://127.0.0.1:1080",
+          "isTrafficTrackingActive": true,
+          "trafficLimitBytes": 1,
+          "notifyPercent": 1,
+          "trafficResetDay": 1,
+          "countryCode": "TE",
+          "consumptionMultiplier": 1,
+          "nodeConsumptionMultiplier": 1,
+          "configProfile": {
+            "activeConfigProfileUuid": "00000000-0000-4000-8000-000000000001",
+            "activeInbounds": [
+              "00000000-0000-4000-8000-000000000001"
+            ]
+          },
+          "providerUuid": "00000000-0000-4000-8000-000000000001",
+          "tags": [
+            "TEST"
+          ],
+          "activePluginUuid": "00000000-0000-4000-8000-000000000001",
+          "integrationUuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "note": "TEST",
+          "ips": [
+            {
+              "ip": "192.0.2.1",
+              "status": "INBOUND"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "nodes_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/nodes/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "nodes_disable": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/00000000-0000-4000-8000-000000000001/actions/disable"
+      }
+    ]
+  },
+  "nodes_enable": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/00000000-0000-4000-8000-000000000001/actions/enable"
+      }
+    ]
+  },
+  "nodes_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/nodes/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "nodes_list": {
+    "args": {
+      "full": true
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/nodes/"
+      }
+    ]
+  },
+  "nodes_reorder": {
+    "args": {
+      "nodes": [
+        {
+          "viewPosition": 1,
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/actions/reorder",
+        "body": {
+          "nodes": [
+            {
+              "viewPosition": 1,
+              "uuid": "00000000-0000-4000-8000-000000000001"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "nodes_reset_traffic": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/00000000-0000-4000-8000-000000000001/actions/reset-traffic"
+      }
+    ]
+  },
+  "nodes_restart": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "forceRestart": true
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/00000000-0000-4000-8000-000000000001/actions/restart",
+        "body": {
+          "forceRestart": true
+        }
+      }
+    ]
+  },
+  "nodes_restart_all": {
+    "args": {
+      "forceRestart": true
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/nodes/actions/restart-all",
+        "body": {
+          "forceRestart": true
+        }
+      }
+    ]
+  },
+  "nodes_tags_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/nodes/tags"
+      }
+    ]
+  },
+  "nodes_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "address": "TEST",
+      "port": 1,
+      "proxyUrl": "socks5://127.0.0.1:1080",
+      "isTrafficTrackingActive": true,
+      "trafficLimitBytes": 1,
+      "notifyPercent": 1,
+      "trafficResetDay": 1,
+      "countryCode": "TE",
+      "consumptionMultiplier": 1,
+      "nodeConsumptionMultiplier": 1,
+      "configProfile": {
+        "activeConfigProfileUuid": "00000000-0000-4000-8000-000000000001",
+        "activeInbounds": [
+          "00000000-0000-4000-8000-000000000001"
+        ]
+      },
+      "providerUuid": "00000000-0000-4000-8000-000000000001",
+      "tags": [
+        "TEST"
+      ],
+      "activePluginUuid": "00000000-0000-4000-8000-000000000001",
+      "integrationUuids": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "note": "TEST",
+      "ips": [
+        {
+          "ip": "192.0.2.1",
+          "status": "INBOUND"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/nodes/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "address": "TEST",
+          "port": 1,
+          "proxyUrl": "socks5://127.0.0.1:1080",
+          "isTrafficTrackingActive": true,
+          "trafficLimitBytes": 1,
+          "notifyPercent": 1,
+          "trafficResetDay": 1,
+          "countryCode": "TE",
+          "consumptionMultiplier": 1,
+          "nodeConsumptionMultiplier": 1,
+          "configProfile": {
+            "activeConfigProfileUuid": "00000000-0000-4000-8000-000000000001",
+            "activeInbounds": [
+              "00000000-0000-4000-8000-000000000001"
+            ]
+          },
+          "providerUuid": "00000000-0000-4000-8000-000000000001",
+          "tags": [
+            "TEST"
+          ],
+          "activePluginUuid": "00000000-0000-4000-8000-000000000001",
+          "integrationUuids": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "note": "TEST",
+          "ips": [
+            {
+              "ip": "192.0.2.1",
+              "status": "INBOUND"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "settings_get": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/remnawave-settings/"
+      }
+    ]
+  },
+  "settings_update": {
+    "args": {
+      "passkeySettings": {
+        "enabled": true,
+        "rpId": "example.com",
+        "origin": "https://example.com"
+      },
+      "oauth2Settings": {
+        "github": {
+          "enabled": true,
+          "clientId": "TEST",
+          "clientSecret": "TEST",
+          "allowedEmails": [
+            "TEST"
+          ]
+        },
+        "pocketid": {
+          "enabled": true,
+          "clientId": "TEST",
+          "clientSecret": "TEST",
+          "frontendDomain": "example.com",
+          "plainDomain": "example.com",
+          "allowedEmails": [
+            "TEST"
+          ]
+        },
+        "yandex": {
+          "enabled": true,
+          "clientId": "TEST",
+          "clientSecret": "TEST",
+          "allowedEmails": [
+            "TEST"
+          ]
+        },
+        "keycloak": {
+          "enabled": true,
+          "realm": "TEST",
+          "clientId": "TEST",
+          "clientSecret": "TEST",
+          "frontendDomain": "example.com",
+          "keycloakDomain": "example.com",
+          "allowedEmails": [
+            "TEST"
+          ]
+        },
+        "generic": {
+          "enabled": true,
+          "clientId": "TEST",
+          "clientSecret": "TEST",
+          "withPkce": true,
+          "authorizationUrl": "TEST",
+          "tokenUrl": "TEST",
+          "frontendDomain": "example.com",
+          "allowedEmails": [
+            "TEST"
+          ]
+        },
+        "telegram": {
+          "enabled": true,
+          "clientId": "TEST",
+          "clientSecret": "TEST",
+          "allowedIds": [
+            "TEST"
+          ],
+          "frontendDomain": "example.com"
+        }
+      },
+      "passwordSettings": {
+        "enabled": true
+      },
+      "brandingSettings": {
+        "title": "TEST",
+        "logoUrl": "https://example.com"
+      }
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/remnawave-settings/",
+        "body": {
+          "passkeySettings": {
+            "enabled": true,
+            "rpId": "example.com",
+            "origin": "https://example.com"
+          },
+          "oauth2Settings": {
+            "github": {
+              "enabled": true,
+              "clientId": "TEST",
+              "clientSecret": "TEST",
+              "allowedEmails": [
+                "TEST"
+              ]
+            },
+            "pocketid": {
+              "enabled": true,
+              "clientId": "TEST",
+              "clientSecret": "TEST",
+              "frontendDomain": "example.com",
+              "plainDomain": "example.com",
+              "allowedEmails": [
+                "TEST"
+              ]
+            },
+            "yandex": {
+              "enabled": true,
+              "clientId": "TEST",
+              "clientSecret": "TEST",
+              "allowedEmails": [
+                "TEST"
+              ]
+            },
+            "keycloak": {
+              "enabled": true,
+              "realm": "TEST",
+              "clientId": "TEST",
+              "clientSecret": "TEST",
+              "frontendDomain": "example.com",
+              "keycloakDomain": "example.com",
+              "allowedEmails": [
+                "TEST"
+              ]
+            },
+            "generic": {
+              "enabled": true,
+              "clientId": "TEST",
+              "clientSecret": "TEST",
+              "withPkce": true,
+              "authorizationUrl": "TEST",
+              "tokenUrl": "TEST",
+              "frontendDomain": "example.com",
+              "allowedEmails": [
+                "TEST"
+              ]
+            },
+            "telegram": {
+              "enabled": true,
+              "clientId": "TEST",
+              "clientSecret": "TEST",
+              "allowedIds": [
+                "TEST"
+              ],
+              "frontendDomain": "example.com"
+            }
+          },
+          "passwordSettings": {
+            "enabled": true
+          },
+          "brandingSettings": {
+            "title": "TEST",
+            "logoUrl": "https://example.com"
+          }
+        }
+      }
+    ]
+  },
+  "shared_lists_create": {
+    "args": {
+      "name": "TEST",
+      "config": {}
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/node-plugins/shared-lists",
+        "body": {
+          "name": "TEST",
+          "config": {}
+        }
+      }
+    ]
+  },
+  "shared_lists_delete": {
+    "args": {
+      "name": "TEST"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/node-plugins/shared-lists",
+        "body": {
+          "name": "TEST"
+        }
+      }
+    ]
+  },
+  "shared_lists_get": {
+    "args": {
+      "name": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/node-plugins/shared-lists/by-name?name=TEST"
+      }
+    ]
+  },
+  "shared_lists_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/node-plugins/shared-lists"
+      }
+    ]
+  },
+  "shared_lists_sync": {
+    "args": {
+      "name": "TEST"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/node-plugins/shared-lists/actions/sync",
+        "body": {
+          "name": "TEST"
+        }
+      }
+    ]
+  },
+  "shared_lists_update": {
+    "args": {
+      "name": "TEST",
+      "config": {}
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/node-plugins/shared-lists",
+        "body": {
+          "name": "TEST",
+          "config": {}
+        }
+      }
+    ]
+  },
+  "snippets_create": {
+    "args": {
+      "name": "TEST",
+      "snippet": [
+        {}
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/snippets/",
+        "body": {
+          "name": "TEST",
+          "snippet": [
+            {}
+          ]
+        }
+      }
+    ]
+  },
+  "snippets_delete": {
+    "args": {
+      "name": "TEST"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/snippets/",
+        "body": {
+          "name": "TEST"
+        }
+      }
+    ]
+  },
+  "snippets_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/snippets/"
+      }
+    ]
+  },
+  "snippets_sync": {
+    "args": {
+      "name": "TEST"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/snippets/actions/sync",
+        "body": {
+          "name": "TEST"
+        }
+      }
+    ]
+  },
+  "snippets_update": {
+    "args": {
+      "name": "TEST",
+      "snippet": [
+        {}
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/snippets/",
+        "body": {
+          "name": "TEST",
+          "snippet": [
+            {}
+          ]
+        }
+      }
+    ]
+  },
+  "squads_accessible_nodes": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/internal-squads/00000000-0000-4000-8000-000000000001/accessible-nodes"
+      }
+    ]
+  },
+  "squads_add_all_users": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/internal-squads/00000000-0000-4000-8000-000000000001/bulk-actions/add-users"
+      }
+    ]
+  },
+  "squads_add_many_users": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "userIds": [
+        1
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/internal-squads/00000000-0000-4000-8000-000000000001/bulk-actions/add-many-users",
+        "body": {
+          "userIds": [
+            1
+          ]
+        }
+      }
+    ]
+  },
+  "squads_create": {
+    "args": {
+      "name": "TEST",
+      "inbounds": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/internal-squads/",
+        "body": {
+          "name": "TEST",
+          "inbounds": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    ]
+  },
+  "squads_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/internal-squads/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "squads_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/internal-squads/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "squads_list": {
+    "args": {
+      "full": true
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/internal-squads/"
+      }
+    ]
+  },
+  "squads_remove_all_users": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/internal-squads/00000000-0000-4000-8000-000000000001/bulk-actions/remove-users"
+      }
+    ]
+  },
+  "squads_remove_many_users": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "userIds": [
+        1
+      ]
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/internal-squads/00000000-0000-4000-8000-000000000001/bulk-actions/remove-many-users",
+        "body": {
+          "userIds": [
+            1
+          ]
+        }
+      }
+    ]
+  },
+  "squads_reorder": {
+    "args": {
+      "items": [
+        {
+          "viewPosition": 1,
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/internal-squads/actions/reorder",
+        "body": {
+          "items": [
+            {
+              "viewPosition": 1,
+              "uuid": "00000000-0000-4000-8000-000000000001"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "squads_set_tags": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "tags": [
+        "TEST"
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/internal-squads/tags",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "tags": [
+            "TEST"
+          ]
+        }
+      }
+    ]
+  },
+  "squads_tags_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/internal-squads/tags"
+      }
+    ]
+  },
+  "squads_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "inbounds": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/internal-squads/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "inbounds": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    ]
+  },
+  "sub_page_configs_clone": {
+    "args": {
+      "cloneFromUuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/subscription-page-configs/actions/clone",
+        "body": {
+          "cloneFromUuid": "00000000-0000-4000-8000-000000000001"
+        }
+      }
+    ]
+  },
+  "sub_page_configs_create": {
+    "args": {
+      "name": "TEST"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/subscription-page-configs/",
+        "body": {
+          "name": "TEST"
+        }
+      }
+    ]
+  },
+  "sub_page_configs_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/subscription-page-configs/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "sub_page_configs_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscription-page-configs/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "sub_page_configs_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscription-page-configs/"
+      }
+    ]
+  },
+  "sub_page_configs_reorder": {
+    "args": {
+      "items": [
+        {
+          "viewPosition": 1,
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/subscription-page-configs/actions/reorder",
+        "body": {
+          "items": [
+            {
+              "viewPosition": 1,
+              "uuid": "00000000-0000-4000-8000-000000000001"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "sub_page_configs_set_tags": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "tags": [
+        "TEST"
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/subscription-page-configs/tags",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "tags": [
+            "TEST"
+          ]
+        }
+      }
+    ]
+  },
+  "sub_page_configs_tags_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscription-page-configs/tags"
+      }
+    ]
+  },
+  "sub_page_configs_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "config": {}
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/subscription-page-configs/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "config": {}
+        }
+      }
+    ]
+  },
+  "subscription_info": {
+    "args": {
+      "shortUuid": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/sub/TEST/info"
+      }
+    ]
+  },
+  "subscription_request_history_list": {
+    "args": {
+      "start": 1,
+      "size": 1,
+      "filters": [
+        {
+          "id": "TEST",
+          "value": {}
+        }
+      ],
+      "filterModes": {},
+      "globalFilterMode": "TEST",
+      "sorting": [
+        {
+          "id": "TEST",
+          "desc": true
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscription-request-history/?start=1&size=1&filters=%5B%7B%22id%22%3A%22TEST%22%2C%22value%22%3A%7B%7D%7D%5D&filterModes=%7B%7D&globalFilterMode=TEST&sorting=%5B%7B%22id%22%3A%22TEST%22%2C%22desc%22%3Atrue%7D%5D"
+      }
+    ]
+  },
+  "subscription_request_history_stats": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscription-request-history/stats"
+      }
+    ]
+  },
+  "subscription_settings_get": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscription-settings/"
+      }
+    ]
+  },
+  "subscription_settings_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "serveJsonAtBaseSubscription": true,
+      "isShowCustomRemarks": true,
+      "customRemarks": {
+        "expiredUsers": [
+          "TEST"
+        ],
+        "limitedUsers": [
+          "TEST"
+        ],
+        "disabledUsers": [
+          "TEST"
+        ],
+        "emptyHosts": [
+          "TEST"
+        ],
+        "HWIDMaxDevicesExceeded": [
+          "TEST"
+        ],
+        "HWIDNotSupported": [
+          "TEST"
+        ]
+      },
+      "customResponseHeaders": {},
+      "randomizeHosts": true,
+      "responseRules": {
+        "version": "1",
+        "settings": {
+          "disableSubscriptionAccessByPath": true
+        },
+        "rules": [
+          {
+            "name": "TEST",
+            "description": "TEST",
+            "enabled": true,
+            "operator": "AND",
+            "conditions": [
+              {
+                "headerName": "TEST",
+                "operator": "EQUALS",
+                "value": "TEST",
+                "caseSensitive": true
+              }
+            ],
+            "responseType": "XRAY_JSON",
+            "responseModifications": {
+              "headers": [
+                {
+                  "key": "TEST",
+                  "value": "TEST"
+                }
+              ],
+              "applyHeadersToEnd": true,
+              "subscriptionTemplate": "TEST",
+              "ignoreHostXrayJsonTemplate": true,
+              "ignoreServeJsonAtBaseSubscription": true,
+              "additionalExtendedClientsRegex": [
+                "TEST"
+              ],
+              "disableHwidCheck": true,
+              "encryption": {
+                "method": "age1",
+                "key": "TEST"
+              },
+              "excludeHostsByTags": [
+                "TEST"
+              ],
+              "respondWithRemarks": [
+                "TEST"
+              ]
+            }
+          }
+        ]
+      },
+      "hwidSettings": {
+        "enabled": true,
+        "fallbackDeviceLimit": 1,
+        "maxDevicesAnnounce": "TEST"
+      }
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/subscription-settings/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "serveJsonAtBaseSubscription": true,
+          "isShowCustomRemarks": true,
+          "customRemarks": {
+            "expiredUsers": [
+              "TEST"
+            ],
+            "limitedUsers": [
+              "TEST"
+            ],
+            "disabledUsers": [
+              "TEST"
+            ],
+            "emptyHosts": [
+              "TEST"
+            ],
+            "HWIDMaxDevicesExceeded": [
+              "TEST"
+            ],
+            "HWIDNotSupported": [
+              "TEST"
+            ]
+          },
+          "customResponseHeaders": {},
+          "randomizeHosts": true,
+          "responseRules": {
+            "version": "1",
+            "settings": {
+              "disableSubscriptionAccessByPath": true
+            },
+            "rules": [
+              {
+                "name": "TEST",
+                "description": "TEST",
+                "enabled": true,
+                "operator": "AND",
+                "conditions": [
+                  {
+                    "headerName": "TEST",
+                    "operator": "EQUALS",
+                    "value": "TEST",
+                    "caseSensitive": true
+                  }
+                ],
+                "responseType": "XRAY_JSON",
+                "responseModifications": {
+                  "headers": [
+                    {
+                      "key": "TEST",
+                      "value": "TEST"
+                    }
+                  ],
+                  "applyHeadersToEnd": true,
+                  "subscriptionTemplate": "TEST",
+                  "ignoreHostXrayJsonTemplate": true,
+                  "ignoreServeJsonAtBaseSubscription": true,
+                  "additionalExtendedClientsRegex": [
+                    "TEST"
+                  ],
+                  "disableHwidCheck": true,
+                  "encryption": {
+                    "method": "age1",
+                    "key": "TEST"
+                  },
+                  "excludeHostsByTags": [
+                    "TEST"
+                  ],
+                  "respondWithRemarks": [
+                    "TEST"
+                  ]
+                }
+              }
+            ]
+          },
+          "hwidSettings": {
+            "enabled": true,
+            "fallbackDeviceLimit": 1,
+            "maxDevicesAnnounce": "TEST"
+          }
+        }
+      }
+    ]
+  },
+  "subscription_templates_create": {
+    "args": {
+      "name": "TEST",
+      "templateType": "XRAY_JSON"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/subscription-templates/",
+        "body": {
+          "name": "TEST",
+          "templateType": "XRAY_JSON"
+        }
+      }
+    ]
+  },
+  "subscription_templates_delete": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/subscription-templates/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "subscription_templates_get": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscription-templates/00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "subscription_templates_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscription-templates/"
+      }
+    ]
+  },
+  "subscription_templates_reorder": {
+    "args": {
+      "items": [
+        {
+          "viewPosition": 1,
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/subscription-templates/actions/reorder",
+        "body": {
+          "items": [
+            {
+              "viewPosition": 1,
+              "uuid": "00000000-0000-4000-8000-000000000001"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "subscription_templates_set_tags": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "tags": [
+        "TEST"
+      ]
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/subscription-templates/tags",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "tags": [
+            "TEST"
+          ]
+        }
+      }
+    ]
+  },
+  "subscription_templates_tags_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscription-templates/tags"
+      }
+    ]
+  },
+  "subscription_templates_update": {
+    "args": {
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "name": "TEST",
+      "templateJson": {},
+      "encodedTemplateYaml": "TEST"
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/subscription-templates/",
+        "body": {
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "name": "TEST",
+          "templateJson": {},
+          "encodedTemplateYaml": "TEST"
+        }
+      }
+    ]
+  },
+  "subscriptions_get_by_short_uuid": {
+    "args": {
+      "shortUuid": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscriptions/by-short-uuid/TEST"
+      }
+    ]
+  },
+  "subscriptions_get_by_user_id": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscriptions/by-id/1"
+      }
+    ]
+  },
+  "subscriptions_get_by_username": {
+    "args": {
+      "username": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscriptions/by-username/TEST"
+      }
+    ]
+  },
+  "subscriptions_get_connection_keys": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscriptions/connection-keys/1"
+      }
+    ]
+  },
+  "subscriptions_get_raw_by_short_uuid": {
+    "args": {
+      "shortUuid": "TEST",
+      "withDisabledHosts": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscriptions/by-short-uuid/TEST/raw?withDisabledHosts=TEST"
+      }
+    ]
+  },
+  "subscriptions_list": {
+    "args": {
+      "start": 1,
+      "size": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/subscriptions/?start=1&size=1"
+      }
+    ]
+  },
+  "system_bandwidth_stats": {
+    "args": {
+      "tz": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/stats/bandwidth?tz=TEST"
+      }
+    ]
+  },
+  "system_configuration": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/configuration"
+      }
+    ]
+  },
+  "system_generate_x25519": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/tools/x25519/generate"
+      }
+    ]
+  },
+  "system_health": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/health"
+      }
+    ]
+  },
+  "system_http_stats": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/stats/http"
+      }
+    ]
+  },
+  "system_metadata": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/metadata"
+      }
+    ]
+  },
+  "system_nodes_metrics": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/nodes/metrics"
+      }
+    ]
+  },
+  "system_nodes_statistics": {
+    "args": {
+      "tz": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/stats/nodes?tz=TEST"
+      }
+    ]
+  },
+  "system_srr_matcher": {
+    "args": {
+      "responseRules": {
+        "version": "1",
+        "settings": {
+          "disableSubscriptionAccessByPath": true
+        },
+        "rules": [
+          {
+            "name": "TEST",
+            "description": "TEST",
+            "enabled": true,
+            "operator": "AND",
+            "conditions": [
+              {
+                "headerName": "TEST",
+                "operator": "EQUALS",
+                "value": "TEST",
+                "caseSensitive": true
+              }
+            ],
+            "responseType": "XRAY_JSON",
+            "responseModifications": {
+              "headers": [
+                {
+                  "key": "TEST",
+                  "value": "TEST"
+                }
+              ],
+              "applyHeadersToEnd": true,
+              "subscriptionTemplate": "TEST",
+              "ignoreHostXrayJsonTemplate": true,
+              "ignoreServeJsonAtBaseSubscription": true,
+              "additionalExtendedClientsRegex": [
+                "TEST"
+              ],
+              "disableHwidCheck": true,
+              "encryption": {
+                "method": "age1",
+                "key": "TEST"
+              },
+              "excludeHostsByTags": [
+                "TEST"
+              ],
+              "respondWithRemarks": [
+                "TEST"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/system/testers/srr-matcher",
+        "body": {
+          "responseRules": {
+            "version": "1",
+            "settings": {
+              "disableSubscriptionAccessByPath": true
+            },
+            "rules": [
+              {
+                "name": "TEST",
+                "description": "TEST",
+                "enabled": true,
+                "operator": "AND",
+                "conditions": [
+                  {
+                    "headerName": "TEST",
+                    "operator": "EQUALS",
+                    "value": "TEST",
+                    "caseSensitive": true
+                  }
+                ],
+                "responseType": "XRAY_JSON",
+                "responseModifications": {
+                  "headers": [
+                    {
+                      "key": "TEST",
+                      "value": "TEST"
+                    }
+                  ],
+                  "applyHeadersToEnd": true,
+                  "subscriptionTemplate": "TEST",
+                  "ignoreHostXrayJsonTemplate": true,
+                  "ignoreServeJsonAtBaseSubscription": true,
+                  "additionalExtendedClientsRegex": [
+                    "TEST"
+                  ],
+                  "disableHwidCheck": true,
+                  "encryption": {
+                    "method": "age1",
+                    "key": "TEST"
+                  },
+                  "excludeHostsByTags": [
+                    "TEST"
+                  ],
+                  "respondWithRemarks": [
+                    "TEST"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "system_stats": {
+    "args": {
+      "tz": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/stats?tz=TEST"
+      }
+    ]
+  },
+  "system_stats_digest": {
+    "args": {
+      "start": "2030-01-01T00:00:00.000Z",
+      "end": "2030-01-01T00:00:00.000Z"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/stats/digest?start=2030-01-01T00%3A00%3A00.000Z&end=2030-01-01T00%3A00%3A00.000Z"
+      }
+    ]
+  },
+  "system_stats_recap": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/system/stats/recap"
+      }
+    ]
+  },
+  "users_accessible_nodes": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/users/1/accessible-nodes"
+      }
+    ]
+  },
+  "users_bulk_all_extend_expiration": {
+    "args": {
+      "extendDays": 1
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/all/extend-expiration-date",
+        "body": {
+          "extendDays": 1
+        }
+      }
+    ]
+  },
+  "users_bulk_all_reset_traffic": {
+    "args": {},
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/all/reset-traffic"
+      }
+    ]
+  },
+  "users_bulk_all_update": {
+    "args": {
+      "status": "ACTIVE",
+      "trafficLimitBytes": 1,
+      "trafficLimitStrategy": "NO_RESET",
+      "expireAt": "2030-01-01T00:00:00.000Z",
+      "description": "TEST",
+      "telegramId": 123456789,
+      "email": "user@example.com",
+      "tag": "TEST",
+      "hwidDeviceLimit": 1
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/all/update",
+        "body": {
+          "status": "ACTIVE",
+          "trafficLimitBytes": 1,
+          "trafficLimitStrategy": "NO_RESET",
+          "expireAt": "2030-01-01T00:00:00.000Z",
+          "description": "TEST",
+          "telegramId": 123456789,
+          "email": "user@example.com",
+          "tag": "TEST",
+          "hwidDeviceLimit": 1
+        }
+      }
+    ]
+  },
+  "users_bulk_delete": {
+    "args": {
+      "userIds": [
+        1
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/delete",
+        "body": {
+          "userIds": [
+            1
+          ]
+        }
+      }
+    ]
+  },
+  "users_bulk_delete_by_status": {
+    "args": {
+      "status": "ACTIVE"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/delete-by-status",
+        "body": {
+          "status": "ACTIVE"
+        }
+      }
+    ]
+  },
+  "users_bulk_extend_expiration": {
+    "args": {
+      "userIds": [
+        1
+      ],
+      "extendDays": 1
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/extend-expiration-date",
+        "body": {
+          "userIds": [
+            1
+          ],
+          "extendDays": 1
+        }
+      }
+    ]
+  },
+  "users_bulk_reset_traffic": {
+    "args": {
+      "userIds": [
+        1
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/reset-traffic",
+        "body": {
+          "userIds": [
+            1
+          ]
+        }
+      }
+    ]
+  },
+  "users_bulk_revoke_subscription": {
+    "args": {
+      "userIds": [
+        1
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/revoke-subscription",
+        "body": {
+          "userIds": [
+            1
+          ]
+        }
+      }
+    ]
+  },
+  "users_bulk_update": {
+    "args": {
+      "userIds": [
+        1
+      ],
+      "fields": {
+        "status": "ACTIVE",
+        "trafficLimitBytes": 1,
+        "trafficLimitStrategy": "NO_RESET",
+        "expireAt": "2030-01-01T00:00:00.000Z",
+        "description": "TEST",
+        "telegramId": 123456789,
+        "email": "user@example.com",
+        "tag": "TEST",
+        "hwidDeviceLimit": 1,
+        "externalSquadUuid": "00000000-0000-4000-8000-000000000001"
+      }
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/update",
+        "body": {
+          "userIds": [
+            1
+          ],
+          "fields": {
+            "status": "ACTIVE",
+            "trafficLimitBytes": 1,
+            "trafficLimitStrategy": "NO_RESET",
+            "expireAt": "2030-01-01T00:00:00.000Z",
+            "description": "TEST",
+            "telegramId": 123456789,
+            "email": "user@example.com",
+            "tag": "TEST",
+            "hwidDeviceLimit": 1,
+            "externalSquadUuid": "00000000-0000-4000-8000-000000000001"
+          }
+        }
+      }
+    ]
+  },
+  "users_bulk_update_squads": {
+    "args": {
+      "userIds": [
+        1
+      ],
+      "activeInternalSquads": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/bulk/update-squads",
+        "body": {
+          "userIds": [
+            1
+          ],
+          "activeInternalSquads": [
+            "00000000-0000-4000-8000-000000000001"
+          ]
+        }
+      }
+    ]
+  },
+  "users_create": {
+    "args": {
+      "username": "TEST",
+      "status": "ACTIVE",
+      "shortUuid": "TEST",
+      "trojanPassword": "TESTXXXX",
+      "vlessUuid": "00000000-0000-4000-8000-000000000001",
+      "ssPassword": "TESTXXXX",
+      "trafficLimitBytes": 1,
+      "trafficLimitStrategy": "NO_RESET",
+      "expireAt": "2030-01-01T00:00:00.000Z",
+      "createdAt": "2030-01-01T00:00:00.000Z",
+      "lastTrafficResetAt": "2030-01-01T00:00:00.000Z",
+      "description": "TEST",
+      "tag": "TEST",
+      "telegramId": 123456789,
+      "email": "user@example.com",
+      "hwidDeviceLimit": 1,
+      "activeInternalSquads": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "externalSquadUuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/",
+        "body": {
+          "username": "TEST",
+          "status": "ACTIVE",
+          "shortUuid": "TEST",
+          "trojanPassword": "TESTXXXX",
+          "vlessUuid": "00000000-0000-4000-8000-000000000001",
+          "ssPassword": "TESTXXXX",
+          "trafficLimitBytes": 1,
+          "trafficLimitStrategy": "NO_RESET",
+          "expireAt": "2030-01-01T00:00:00.000Z",
+          "createdAt": "2030-01-01T00:00:00.000Z",
+          "lastTrafficResetAt": "2030-01-01T00:00:00.000Z",
+          "description": "TEST",
+          "tag": "TEST",
+          "telegramId": 123456789,
+          "email": "user@example.com",
+          "hwidDeviceLimit": 1,
+          "activeInternalSquads": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "externalSquadUuid": "00000000-0000-4000-8000-000000000001"
+        }
+      }
+    ]
+  },
+  "users_delete": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "DELETE",
+        "path": "/api/users/1"
+      }
+    ]
+  },
+  "users_disable": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/1/actions/disable"
+      }
+    ]
+  },
+  "users_enable": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/1/actions/enable"
+      }
+    ]
+  },
+  "users_extend_expiration": {
+    "args": {
+      "userId": 1,
+      "days": 1
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/1/actions/extend",
+        "body": {
+          "days": 1
+        }
+      }
+    ]
+  },
+  "users_get": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/users/1"
+      }
+    ]
+  },
+  "users_get_by_short_uuid": {
+    "args": {
+      "shortUuid": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/users/by-short-uuid/TEST"
+      }
+    ]
+  },
+  "users_get_by_username": {
+    "args": {
+      "username": "TEST"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/users/by-username/TEST"
+      }
+    ]
+  },
+  "users_list": {
+    "args": {
+      "start": 1,
+      "size": 1,
+      "filters": [
+        {
+          "id": "TEST",
+          "value": {}
+        }
+      ],
+      "filterModes": {},
+      "globalFilterMode": "TEST",
+      "sorting": [
+        {
+          "id": "TEST",
+          "desc": true
+        }
+      ]
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/users/?start=1&size=1&filters=%5B%7B%22id%22%3A%22TEST%22%2C%22value%22%3A%7B%7D%7D%5D&filterModes=%7B%7D&globalFilterMode=TEST&sorting=%5B%7B%22id%22%3A%22TEST%22%2C%22desc%22%3Atrue%7D%5D"
+      }
+    ]
+  },
+  "users_reset_traffic": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/1/actions/reset-traffic"
+      }
+    ]
+  },
+  "users_resolve": {
+    "args": {
+      "username": "TEST"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/resolve",
+        "body": {
+          "username": "TEST"
+        }
+      }
+    ]
+  },
+  "users_revoke_subscription": {
+    "args": {
+      "userId": 1,
+      "revokeOnlyPasswords": true,
+      "shortUuid": "TESTXXXXXXXXXXXX"
+    },
+    "requests": [
+      {
+        "method": "POST",
+        "path": "/api/users/1/actions/revoke",
+        "body": {
+          "revokeOnlyPasswords": true,
+          "shortUuid": "TESTXXXXXXXXXXXX"
+        }
+      }
+    ]
+  },
+  "users_stream": {
+    "args": {
+      "cursor": 1,
+      "size": 1,
+      "status": "ACTIVE",
+      "trafficLimitStrategy": "NO_RESET",
+      "telegramId": "123456789",
+      "email": "user@example.com",
+      "tag": "TEST",
+      "externalSquadUuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/users/stream?cursor=1&size=1&status=ACTIVE&trafficLimitStrategy=NO_RESET&telegramId=123456789&email=user%40example.com&tag=TEST&externalSquadUuid=00000000-0000-4000-8000-000000000001"
+      }
+    ]
+  },
+  "users_subscription_request_history": {
+    "args": {
+      "userId": 1
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/users/1/subscription-request-history"
+      }
+    ]
+  },
+  "users_tags_list": {
+    "args": {},
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/users/tags"
+      }
+    ]
+  },
+  "users_update": {
+    "args": {
+      "username": "TEST",
+      "id": 1,
+      "status": "ACTIVE",
+      "trafficLimitBytes": 1,
+      "trafficLimitStrategy": "NO_RESET",
+      "expireAt": "2030-01-01T00:00:00.000Z",
+      "description": "TEST",
+      "tag": "TEST",
+      "telegramId": 123456789,
+      "email": "user@example.com",
+      "hwidDeviceLimit": 1,
+      "activeInternalSquads": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "externalSquadUuid": "00000000-0000-4000-8000-000000000001"
+    },
+    "requests": [
+      {
+        "method": "PATCH",
+        "path": "/api/users/",
+        "body": {
+          "username": "TEST",
+          "id": 1,
+          "status": "ACTIVE",
+          "trafficLimitBytes": 1,
+          "trafficLimitStrategy": "NO_RESET",
+          "expireAt": "2030-01-01T00:00:00.000Z",
+          "description": "TEST",
+          "tag": "TEST",
+          "telegramId": 123456789,
+          "email": "user@example.com",
+          "hwidDeviceLimit": 1,
+          "activeInternalSquads": [
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "externalSquadUuid": "00000000-0000-4000-8000-000000000001"
+        }
+      }
+    ]
+  }
+}

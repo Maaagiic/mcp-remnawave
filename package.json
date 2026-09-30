@@ -1,7 +1,7 @@
 {
   "name": "remnawave-mcp",
-  "version": "2.1.0",
-  "description": "MCP server for Remnawave proxy management panel",
+  "version": "3.0.0",
+  "description": "MCP server for the Remnawave VPN panel (tools generated from the backend contract)",
   "type": "module",
   "bin": {
     "remnawave-mcp": "dist/index.js"
@@ -10,7 +10,10 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "tsup src/lib.ts --format esm --target node22 --out-dir .test-build --clean --silent && node --test \"test/*.test.mjs\"",
+    "check": "npm run typecheck && npm test"
   },
   "keywords": [
     "mcp",
@@ -21,10 +24,10 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1",
-    "@remnawave/backend-contract": "^2.6.27",
+    "@modelcontextprotocol/sdk": "^1.31.0",
+    "@remnawave/backend-contract": "3.4.15",
     "dotenv": "^17.4.2",
-    "zod": "^3.25.76"
+    "zod": "4.5.4"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -41,5 +44,12 @@
   "homepage": "https://github.com/Maaagiic/mcp-remnawave#readme",
   "bugs": {
     "url": "https://github.com/Maaagiic/mcp-remnawave/issues"
-  }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README.ru.md",
+    "LICENSE",
+    ".env.example"
+  ]
 }

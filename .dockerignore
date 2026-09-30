@@ -1,0 +1,12 @@
+node_modules
+dist
+.test-build
+.git
+.github
+.env
+.env.*
+!.env.example
+*.env
+test
+dev
+*.md
